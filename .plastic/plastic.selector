@@ -1,0 +1,4 @@
+repository "Adventure2DGame@thanhhoa8323@cloud"
+  path "/"
+    br "/main"
+    co "/main"
