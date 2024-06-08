@@ -5,21 +5,21 @@ using UnityEngine.UI;
 
 public class ItemCollector : MonoBehaviour
 {
-    private int strawberries = 0;
+    private int items = 0;
 
     [SerializeField] private AudioSource collectSoundEffect;
 
-    [SerializeField] private Text StrawberriesText;
+    [SerializeField] private Text itemText;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("Strawberry"))
+        if(collision.gameObject.CompareTag("item"))
         {
             collectSoundEffect.Play();
             Destroy(collision.gameObject);
-            strawberries++;
-            Debug.Log("Strawberries:" +  strawberries);
-            StrawberriesText.text = "Strawberries:" + strawberries;
+            items++;
+            Debug.Log("Fruits:" +  items);
+            itemText.text = "Fruits:" + items;
         }    
     }
 }
