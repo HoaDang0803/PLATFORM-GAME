@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -12,6 +14,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask JumpableGround;
     
     private float dirX = 0f;
+    private bool isFlipped = false;
+
 
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private float jumpForce = 14f;
@@ -19,13 +23,18 @@ public class PlayerMovement : MonoBehaviour
     private bool moveLeft;
     private bool moveRight;
     private float horizontalMove;
-    
+
+    [SerializeField] private GameObject pnlPauseGame;
+    private Button btnPauseGame;
+
     private enum MovementState { Idle, Running, Jumping, Falling }
 
     [SerializeField] private AudioSource JumpSoundEffect;
 
     private void Start()
     {
+        pnlPauseGame.SetActive(false);
+
         rb = GetComponent<Rigidbody2D>();
         coll = GetComponent<BoxCollider2D>();
         sprite = GetComponent<SpriteRenderer>();
@@ -39,7 +48,8 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         // Move();
-        
+
+
         dirX = Input.GetAxisRaw("Horizontal");
         rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
 
@@ -50,6 +60,7 @@ public class PlayerMovement : MonoBehaviour
         }
         
         UpdateAnimationState();
+
     }
 
     /*public void PointerDownLeft()
@@ -86,6 +97,14 @@ public class PlayerMovement : MonoBehaviour
         }
     }*/
 
+    private void Flip()
+    {
+        isFlipped = !isFlipped;
+        Vector3 localScale = transform.localScale;
+        localScale.x *= -1;
+        transform.localScale = localScale;
+    }
+
     private void UpdateAnimationState()
     {
         MovementState state;
@@ -111,12 +130,18 @@ public class PlayerMovement : MonoBehaviour
         if (dirX > 0f)
         {
             state = MovementState.Running;
-            sprite.flipX = false;
+            if (isFlipped)
+            {
+                Flip();
+            }
         }
         else if (dirX < 0f)
         {
             state = MovementState.Running;
-            sprite.flipX = true;
+            if (!isFlipped)
+            {
+                Flip();
+            }
         }
         else
         {
@@ -138,5 +163,26 @@ public class PlayerMovement : MonoBehaviour
     private bool IsGrounded()
     {
         return Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, Vector2.down, .1f, JumpableGround);
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0;
+        pnlPauseGame.SetActive(true);
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1;
+        pnlPauseGame.SetActive(false);
+    }
+    public void RetryGame()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    public void ExitGame()
+    {
+        SceneManager.LoadScene(0);
     }
 }

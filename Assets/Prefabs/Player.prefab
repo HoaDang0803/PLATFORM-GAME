@@ -182,6 +182,7 @@ MonoBehaviour:
     m_Bits: 64
   moveSpeed: 6
   jumpForce: 13
+  pnlPauseGame: {fileID: 0}
   JumpSoundEffect: {fileID: 4321931403762463087}
 --- !u!95 &8903704819241875671
 Animator:
