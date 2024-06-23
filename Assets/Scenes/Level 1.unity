@@ -57274,6 +57274,22 @@ PrefabInstance:
       propertyPath: BypassListenerEffects
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5654321002074470985, guid: 65f365a72249dcc41bea77daaccde4dc, type: 3}
+      propertyPath: m_Size.x
+      value: 1.5733334
+      objectReference: {fileID: 0}
+    - target: {fileID: 5654321002074470985, guid: 65f365a72249dcc41bea77daaccde4dc, type: 3}
+      propertyPath: m_Size.y
+      value: 1.2133334
+      objectReference: {fileID: 0}
+    - target: {fileID: 5654321002074470985, guid: 65f365a72249dcc41bea77daaccde4dc, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -654447764, guid: 06458fc532ca84741b0926f3ab244541, type: 3}
+    - target: {fileID: 5654321002074470985, guid: 65f365a72249dcc41bea77daaccde4dc, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7060118186694718173, guid: 65f365a72249dcc41bea77daaccde4dc, type: 3}
       propertyPath: m_Enabled
       value: 1

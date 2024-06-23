@@ -14,9 +14,9 @@ public class WaypointFollower : MonoBehaviour
         if (Vector2.Distance(waypoints[currentWaypointIndex].transform.position, transform.position) < .1f)
         {
             currentWaypointIndex++;
-            Vector3 localScale = transform.localScale;
-            localScale.x *= -1;
-            transform.localScale = localScale;
+            //Vector3 localScale = transform.localScale;
+            //localScale.x *= -1;
+            //transform.localScale = localScale;
             if(currentWaypointIndex >= waypoints.Length)
             {
                 currentWaypointIndex = 0;
